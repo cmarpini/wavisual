@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wavisual</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="site-header">
+        <h1>Wavisual</h1>
+        <p class="lede">
+          Visualize a diferença entre comprimento de onda e frequência, do ultravioleta ao infravermelho.
+        </p>
+      </header>
+
+      <main>
+        <section class="panel spectrum-panel" aria-labelledby="spectrum-title">
+          <div class="spectrum-label">
+            <label id="spectrum-title" for="wavelength">Espectro UV–visível–IV</label>
+            <span class="spectrum-hint" id="spectrum-hint">UV → visível → IV · escala log(f)</span>
+          </div>
+          <div class="spectrum-control">
+            <canvas id="spectrum" aria-hidden="true"></canvas>
+            <input
+              id="wavelength"
+              class="spectrum-slider"
+              type="range"
+              min="0"
+              max="10000"
+              value="4005"
+              step="1"
+              dir="ltr"
+              aria-valuemin="200"
+              aria-valuemax="2500"
+              aria-valuenow="550"
+              aria-valuetext="550 nanômetros"
+            />
+          </div>
+          <div class="spectrum-freq-scale" id="spectrum-freq-scale" aria-hidden="true"></div>
+          <div class="spectrum-axis" aria-hidden="true">
+            <span class="axis-uv">UV</span>
+            <span class="axis-vis">visível</span>
+            <span class="axis-iv">IV</span>
+          </div>
+          <div class="spectrum-scale-row">
+            <p class="spectrum-scale-note">
+              Escala em log₁₀ da frequência (f = c/λ). O visível (380–750 nm) ocupa cerca de 26% da barra.
+            </p>
+            <button
+              type="button"
+              id="spectrum-sort"
+              class="spectrum-sort"
+              aria-pressed="false"
+              aria-controls="spectrum wavelength"
+              aria-label="Ordenar espectro por frequência"
+            >
+              Ordenar por frequência
+            </button>
+          </div>
+        </section>
+
+        <div class="layout">
+          <section class="panel swatch-card" aria-labelledby="color-title">
+            <h2 id="color-title">Cor atual</h2>
+            <p class="band-note" id="band-note">Faixa visível</p>
+            <div class="swatch" role="img" aria-label="Amostra da cor correspondente ao comprimento de onda escolhido"></div>
+            <div class="readings">
+              <div class="reading">
+                <p class="reading-label" id="lambda-label">Comprimento de onda (λ)</p>
+                <p class="reading-value" aria-labelledby="lambda-label">
+                  <span class="value" id="lambda-value">550</span>
+                  <span class="unit">nm</span>
+                </p>
+              </div>
+              <div class="reading">
+                <p class="reading-label" id="freq-label">Frequência (f)</p>
+                <p class="reading-value" aria-labelledby="freq-label">
+                  <span class="value" id="freq-thz">545,1</span>
+                  <span class="unit">THz</span>
+                  <span class="hz-note" id="freq-hz">5,45 × 10¹⁴ Hz</span>
+                </p>
+              </div>
+            </div>
+            <p class="physics-note">
+              Frequência e comprimento de onda são <strong>inversos</strong>:
+              <strong>f = c / λ</strong>. Quanto menor o comprimento de onda, maior a frequência.
+            </p>
+          </section>
+
+          <section class="panel wave-card" aria-labelledby="wave-title">
+            <h2 id="wave-title">Onda ilustrativa</h2>
+            <div class="wave-wrap">
+              <canvas id="wave" aria-label="Seno animado cujo período espacial cresce com λ e cuja oscilação fica mais rápida com f"></canvas>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script src="js/physics.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
